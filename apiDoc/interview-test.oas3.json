@@ -1,0 +1,1122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "INTERVIEW TEST API",
+    "description": "This is an API for interview test!",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://interview-test.digital.cz",
+      "description": "testing"
+    }
+  ],
+  "paths": {
+    "/api/auth-token": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Get JWT token",
+        "operationId": "post-api-auth-token",
+        "requestBody": {
+          "description": "Get bearer token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JWT response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/salaries": {
+      "get": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "List Salaries",
+        "operationId": "get_api.salaries.list",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "Return results by the `user`",
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "format": "ulid"
+            },
+            "form": false
+          },
+          {
+            "name": "money",
+            "in": "query",
+            "description": "Return results where the `money` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "money[gt]",
+            "in": "query",
+            "description": "Return results where the `money` is greater than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "money[gte]",
+            "in": "query",
+            "description": "Return results where the `money` is greater than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "money[lt]",
+            "in": "query",
+            "description": "Return results where the `money` is less than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "money[lte]",
+            "in": "query",
+            "description": "Return results where the `money` is less than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Return results where the `year` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "year[gt]",
+            "in": "query",
+            "description": "Return results where the `year` is greater than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "year[gte]",
+            "in": "query",
+            "description": "Return results where the `year` is greater than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "year[lt]",
+            "in": "query",
+            "description": "Return results where the `year` is less than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "year[lte]",
+            "in": "query",
+            "description": "Return results where the `year` is less than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Return results where the `month` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "month[gt]",
+            "in": "query",
+            "description": "Return results where the `month` is greater than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "month[gte]",
+            "in": "query",
+            "description": "Return results where the `month` is greater than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "month[lt]",
+            "in": "query",
+            "description": "Return results where the `month` is less than this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "month[lte]",
+            "in": "query",
+            "description": "Return results where the `month` is less than or equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "number"
+            },
+            "form": false
+          },
+          {
+            "name": "order[createdAt]",
+            "in": "query",
+            "description": "Sort results by the `createdAt` field",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit the number of the objects returned. Can range between 1 and 500 and the default is 30.",
+            "schema": {
+              "type": "integer",
+              "default": 30,
+              "maximum": 500,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A cursor for pagination across multiple pages of results.",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of Salary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Salary"
+                      }
+                    },
+                    "count": {
+                      "type": "number"
+                    },
+                    "page": {
+                      "type": "number"
+                    },
+                    "limit": {
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "Create Salary",
+        "operationId": "post_api.salaries.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSalaryInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Salary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/salaries/{salary}": {
+      "get": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "Get Salary",
+        "operationId": "get_api.salaries.get",
+        "parameters": [
+          {
+            "name": "salary",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Salary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "Update Salary",
+        "operationId": "post_api.salaries.update",
+        "parameters": [
+          {
+            "name": "salary",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSalaryInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Salary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Salary"
+        ],
+        "summary": "Delete Salary",
+        "operationId": "delete_api.salaries.delete",
+        "parameters": [
+          {
+            "name": "salary",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List Users",
+        "operationId": "get_api.users.list",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Return results where the `email` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "email[starts_with]",
+            "in": "query",
+            "description": "Return results where a word in `email` starts with this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "email[contains]",
+            "in": "query",
+            "description": "Return results where the `email` contains this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Return results where the `name` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "name[starts_with]",
+            "in": "query",
+            "description": "Return results where a word in `name` starts with this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "name[contains]",
+            "in": "query",
+            "description": "Return results where the `name` contains this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "surname",
+            "in": "query",
+            "description": "Return results where the `surname` is equal to this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "surname[starts_with]",
+            "in": "query",
+            "description": "Return results where a word in `surname` starts with this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "surname[contains]",
+            "in": "query",
+            "description": "Return results where the `surname` contains this value",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            },
+            "form": false
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Return results by the `active` field",
+            "style": "form",
+            "schema": {
+              "type": "boolean"
+            },
+            "form": false
+          },
+          {
+            "name": "order[name]",
+            "in": "query",
+            "description": "Sort results by the `name` field",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "order[createdAt]",
+            "in": "query",
+            "description": "Sort results by the `createdAt` field",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit the number of the objects returned. Can range between 1 and 500 and the default is 30.",
+            "schema": {
+              "type": "integer",
+              "default": 30,
+              "maximum": 500,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A cursor for pagination across multiple pages of results.",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    },
+                    "count": {
+                      "type": "number"
+                    },
+                    "page": {
+                      "type": "number"
+                    },
+                    "limit": {
+                      "type": "number"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create User",
+        "operationId": "post_api.users.create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{user}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User",
+        "operationId": "get_api.users.get",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete User",
+        "operationId": "delete_api.users.delete",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update User",
+        "operationId": "patch_api.users.update",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Credentials": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "{{email}}"
+          },
+          "password": {
+            "type": "string",
+            "example": "{{password}}"
+          }
+        },
+        "type": "object"
+      },
+      "Token": {
+        "properties": {
+          "token": {
+            "description": "Bearer token",
+            "type": "string",
+            "readOnly": true,
+            "example": "{{token}}"
+          },
+          "expiresAt": {
+            "description": "Expiration time (deprecated)",
+            "type": "integer",
+            "readOnly": true,
+            "example": 1609154833
+          },
+          "exp": {
+            "description": "Expiration time",
+            "type": "integer",
+            "readOnly": true,
+            "example": 1609154833
+          },
+          "iot": {
+            "description": "Issued At",
+            "type": "integer",
+            "readOnly": true,
+            "example": 1610528602
+          }
+        },
+        "type": "object"
+      },
+      "Unauthorized": {
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 401
+          },
+          "message": {
+            "type": "string",
+            "example": "Invalid credentials."
+          }
+        },
+        "type": "object"
+      },
+      "BadRequest": {
+        "required": [
+          "title",
+          "detail"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Validation Failed"
+          },
+          "detail": {
+            "type": "string",
+            "example": "property: This value is invalid."
+          },
+          "status": {
+            "type": "integer",
+            "example": 400
+          },
+          "violations": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "propertyPath": {
+                  "type": "string",
+                  "example": "property"
+                },
+                "title": {
+                  "type": "string",
+                  "example": "This value is invalid."
+                },
+                "parameters": {
+                  "type": "object",
+                  "example": {
+                    "{{ value }}": "invalid value"
+                  },
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "example": "urn:uuid:9ff3fdc4-b214-49db-8718-39c314e33d45"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "NotFound": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "An error occurred"
+          },
+          "status": {
+            "type": "integer",
+            "example": 404
+          },
+          "detail": {
+            "type": "string",
+            "example": "Not Found"
+          }
+        },
+        "type": "object"
+      },
+      "Forbidden": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "An error occurred"
+          },
+          "status": {
+            "type": "integer",
+            "example": 403
+          },
+          "detail": {
+            "type": "string",
+            "example": "Forbidden"
+          }
+        },
+        "type": "object"
+      },
+      "Salary": {
+        "properties": {
+          "money": {
+            "title": "The money of salary",
+            "type": "integer"
+          },
+          "year": {
+            "title": "The money of salary",
+            "type": "integer"
+          },
+          "month": {
+            "title": "The money of salary",
+            "type": "integer"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Ulid"
+          },
+          "createdAt": {
+            "title": "Time of creation",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "title": "Time of last update",
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "CreateSalaryInput": {
+        "required": [
+          "user",
+          "money",
+          "year",
+          "month"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/Ulid2"
+          },
+          "money": {
+            "title": "The money of salary",
+            "type": "integer",
+            "minimum": 0
+          },
+          "year": {
+            "title": "The money of salary",
+            "type": "integer",
+            "maximum": 9999,
+            "minimum": 1900
+          },
+          "month": {
+            "title": "The money of salary",
+            "type": "integer",
+            "maximum": 12,
+            "minimum": 1
+          }
+        },
+        "type": "object"
+      },
+      "UpdateSalaryInput": {
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/Ulid2"
+          },
+          "money": {
+            "title": "The money of salary",
+            "type": "integer",
+            "minimum": 0
+          },
+          "year": {
+            "title": "The money of salary",
+            "type": "integer",
+            "maximum": 9999,
+            "minimum": 1900
+          },
+          "month": {
+            "title": "The money of salary",
+            "type": "integer",
+            "maximum": 12,
+            "minimum": 1
+          }
+        },
+        "type": "object"
+      },
+      "User": {
+        "properties": {
+          "email": {
+            "title": "The email of the user",
+            "type": "string"
+          },
+          "name": {
+            "title": "The name of the user",
+            "type": "string"
+          },
+          "surname": {
+            "title": "The surname of the user",
+            "type": "string"
+          },
+          "active": {
+            "title": "Whether user is active",
+            "type": "boolean"
+          },
+          "note": {
+            "title": "The note of the user",
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "$ref": "#/components/schemas/Ulid"
+          },
+          "createdAt": {
+            "title": "Time of creation",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "title": "Time of last update",
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "CreateUserInput": {
+        "required": [
+          "email",
+          "name",
+          "surname",
+          "plainPassword"
+        ],
+        "properties": {
+          "email": {
+            "title": "The email of the user",
+            "type": "string",
+            "maxLength": 255
+          },
+          "name": {
+            "title": "The name of the user",
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "surname": {
+            "title": "The surname of the user",
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "active": {
+            "title": "Whether user is active",
+            "type": "boolean"
+          },
+          "plainPassword": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 10,
+            "nullable": true
+          },
+          "note": {
+            "title": "The note of the user",
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "UpdateUserInput": {
+        "properties": {
+          "email": {
+            "title": "The email of the user",
+            "type": "string",
+            "maxLength": 255
+          },
+          "name": {
+            "title": "The name of the user",
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "surname": {
+            "title": "The surname of the user",
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "active": {
+            "title": "Whether user is active",
+            "type": "boolean"
+          },
+          "plainPassword": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 10,
+            "nullable": true
+          },
+          "note": {
+            "title": "The note of the user",
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "Ulid": {
+        "type": "string",
+        "format": "ulid",
+        "example": "01GD2DXGJ11TNKXKN66RD2BZHQ"
+      },
+      "Ulid2": {
+        "type": "string",
+        "format": "ulid",
+        "example": "01GD2DXGJ11TNKXKN66RD2BZHQ"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BadRequest"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NotFound"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Forbidden"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "bearerFormat": "JWT",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Token"
+    }
+  ]
+}
