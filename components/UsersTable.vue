@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, key) in props.items" :key="key" class="bg-white border-b">
+        <tr v-for="(item, key) in props.items.items" :key="key" class="bg-white border-b">
           <td class="px-6 py-4">
             {{ item.email }}
           </td>
@@ -38,6 +38,21 @@
             <DeleteUserModal :user="item" @user-deleted="userDeleted" />
           </td>
         </tr>
+        <tr>
+          <td>
+            <div class="max-w-lg mx-auto flex items-center">
+              <button
+                v-for="pageNumber in totalPages"
+                :key="pageNumber"
+                class="border border-black text-black text-sm p-3 first:rounded-l-md last:rounded-r-md"
+                :class="{'bg-purple-500 text-white': props.items.page === pageNumber}"
+                @click="changePage(pageNumber)"
+              >
+                {{ pageNumber }}
+              </button>
+            </div>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -46,7 +61,7 @@
 <script setup lang="ts">
 import { InformationCircleIcon } from '@heroicons/vue/20/solid';
 
-const emit = defineEmits(['userDeleted']);
+const emit = defineEmits(['userDeleted', 'pageChange']);
 const props = defineProps({
   items: {
     type: Object,
@@ -54,7 +69,14 @@ const props = defineProps({
   },
 });
 
+const totalPages = computed(() => {
+  return Math.ceil(props.items.count / props.items.limit);
+});
+
 function userDeleted () {
   emit('userDeleted');
+}
+function changePage (pageNumber) {
+  emit('pageChange', { page: pageNumber });
 }
 </script>

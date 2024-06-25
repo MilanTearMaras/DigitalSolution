@@ -4,6 +4,7 @@
       <SalaryForm :salary="salaryData" @submit="onSubmit" @cancel="router.push('/salary')" />
     </div>
   </div>
+  <GlobalAlert ref="alert" text="Záznam byl editován." />
 </template>
 
 <script setup lang="ts">
@@ -12,6 +13,7 @@ import { SalaryService } from '~/apiClient';
 const router = useRouter();
 const { params } = useRoute();
 const salaryData = ref(null);
+const alert = ref(null);
 
 onMounted(() => {
   loadData();
@@ -23,6 +25,6 @@ async function loadData () {
 
 async function onSubmit (values) {
   await SalaryService.postApiSalariesUpdate(params.id, values);
-  router.push({ path: '/salary' });
+  alert.value.activateAlert();
 }
 </script>

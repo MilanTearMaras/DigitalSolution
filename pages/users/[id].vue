@@ -1,9 +1,10 @@
 <template>
-  <div class="h-screen flex justify-center items-center">
+  <div class="h-screen flex justify-center items-center relative">
     <div class="inline-block bg-white p-10 rounded-lg text-center">
       <UserForm :user="userData" @submit="onSubmit" @cancel="router.push('/')" />
     </div>
   </div>
+  <GlobalAlert ref="alert" text="Uživatel byl editován." />
 </template>
 
 <script setup lang="ts">
@@ -12,6 +13,7 @@ import { UserService } from '~/apiClient';
 const router = useRouter();
 const userData = ref(null);
 const { params } = useRoute();
+const alert = ref(null);
 
 onMounted(() => {
   loadData();
@@ -22,6 +24,6 @@ async function loadData () {
 }
 async function onSubmit (values) {
   await UserService.patchApiUsersUpdate(params.id, values);
-  router.push({ path: '/' });
+  alert.value.activateAlert();
 }
 </script>
