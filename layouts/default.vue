@@ -5,24 +5,24 @@
         <nav class="flex flex-col gap-5">
           <NuxtLink
             to="/"
-            class="inline-flex w-full px-4 py-2.5 bg-white text-black rounded-md"
+            class="inline-flex w-full px-4 py-2.5 bg-white text-white rounded-md items-center bg-opacity-20"
           >
-            <UserCircleIcon class="w-5 h-5 inline-block" />
+            <UserCircleIcon class="w-5 h-5 inline-block mr-2" />
             Users
           </NuxtLink>
           <NuxtLink
             to="/login"
-            class="inline-flex w-full px-4 py-2.5 bg-white text-black rounded-md"
+            class="inline-flex w-full px-4 py-2.5 bg-white text-white rounded-md items-center bg-opacity-20"
           >
-            <ArrowRightOnRectangleIcon class="w-5 h-5 inline-block" />
+            <ArrowRightOnRectangleIcon class="w-5 h-5 inline-block mr-2" />
             Login
           </NuxtLink>
           <NuxtLink
             v-if="authenticated"
             to="/salary"
-            class="inline-flex w-full px-4 py-2.5 bg-white text-black rounded-md"
+            class="inline-flex w-full px-4 py-2.5 bg-white text-white rounded-md items-center bg-opacity-20"
           >
-            <BanknotesIcon class="w-5 h-5 inline-block" />
+            <BanknotesIcon class="w-5 h-5 inline-block mr-2" />
             Salary
           </NuxtLink>
         </nav>
@@ -40,9 +40,7 @@
 </template>
 
 <script setup>
-import { UserCircleIcon } from '@heroicons/vue/20/solid';
-import { BanknotesIcon } from '@heroicons/vue/20/solid';
-import { ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid';
+import { UserCircleIcon, BanknotesIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 

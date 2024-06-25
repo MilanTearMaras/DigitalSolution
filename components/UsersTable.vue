@@ -24,7 +24,8 @@
             {{ item.name }}
           </td>
           <td class="px-6 py-4">
-            <div class="py-1 px-4 no-underline rounded-full font-sans font-semibold text-sm border-blue mr-2" :class="{'bg-red-200': !item.active, 'text-red-500': !item.active, 'bg-green-200': item.active, 'text-green-500': item.active}">
+            <div class="flex items-center py-1 px-4 no-underline rounded-full font-sans font-semibold text-sm border-blue mr-2" :class="{'bg-red-200': !item.active, 'text-red-500': !item.active, 'bg-green-200': item.active, 'text-green-500': item.active}">
+              <span class="w-3 h-3 rounded-full mr-3" :class="{'bg-red-500': !item.active, 'bg-green-500': item.active}" />
               {{ item.active ? 'Aktivní' : 'Neaktivní' }}
             </div>
           </td>

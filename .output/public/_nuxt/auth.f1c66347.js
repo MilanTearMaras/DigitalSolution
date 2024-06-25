@@ -1,0 +1,1 @@
+import{U as t,y as u,r as i,O as s,V as r,W as o}from"./entry.74a39a8b.js";import{u as f}from"./auth.faad4368.js";import"./request.a9cd6104.js";const d=t(e=>{const{authenticated:n}=u(f()),a=i(s.TOKEN);if(a.value&&(n.value=!0),a.value&&(e==null?void 0:e.name)==="login")return r("/");if(!a.value&&(e==null?void 0:e.name)!=="login")return o(),r("/")});export{d as default};
