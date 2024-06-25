@@ -1,8 +1,8 @@
-// import { OpenAPI } from '~/apiClient';
+import { OpenAPI } from '~/apiClient';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  // OpenAPI.BASE = nuxtApp.$config.public.apiBasePath ?? OpenAPI.BASE;
-  // OpenAPI.TOKEN = ... - once logged in, set bearer auth token for secured endpoints;
+  OpenAPI.BASE = nuxtApp.$config.public.apiBasePath ?? OpenAPI.BASE;
+  OpenAPI.TOKEN = undefined;
   return;
   console.log(nuxtApp);
 });

@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: [
+    '@pinia/nuxt',
+  ],
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -13,6 +16,6 @@ export default defineNuxtConfig({
     },
   },
   generate: {
-    routes: ['/', '/login', '/salary'], // pre-generate static pages
+    routes: ['/', '/login', '/salaries'], // pre-generate static pages
   },
 });
